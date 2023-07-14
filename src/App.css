@@ -5,7 +5,7 @@
 .container {
   min-height: 100vh;
   display: grid;
-  grid-template: 1fr 1fr 3fr / 1fr 4fr 1fr;
+  grid-template: 1fr 3fr 1fr / 1fr 4fr 1fr;
 }
 
 .header {
@@ -16,22 +16,26 @@
   justify-content: center;
 }
 
-.filter {
+/* .filter {
   grid-area: 2 / 2 / 3 / 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .auth {
   grid-area: 2 / 2 / 4 / 3;
 }
 
 .content {
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: 2 / 2 / 3 / 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+
+.footer {
+  grid-area: 3 / 2 / 4 / 3;
 }

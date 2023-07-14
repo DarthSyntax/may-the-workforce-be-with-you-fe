@@ -28,9 +28,13 @@ const SignUp = ({ setLogin }) => {
       }),
     });
 
+    const authHeader = req.headers.get('Authorization');
     const reqJson = await req.json();
-    setToken(reqJson.headers.Authorization.split(' ')[1]);
-    setCurrentUser(reqJson.data);
+
+    if (authHeader) {
+      setToken(authHeader.split(' ')[1]);
+      setCurrentUser(reqJson.data);
+    }
   };
 
   return (
@@ -44,28 +48,28 @@ const SignUp = ({ setLogin }) => {
             className='input'
             placeholder='Full Name'
             value={fullName}
-            onChange={() => setFullName(fullName)}
+            onChange={(e) => setFullName(e.target.value)}
           />
           <input
             type='email'
             className='input'
             placeholder='Email'
             value={email}
-            onChange={() => setEmail(email)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type='password'
             className='input'
             placeholder='Password'
             value={password}
-            onChange={() => setPassword(password)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type='password'
             className='input'
             placeholder='Confirm Password'
             value={passwordConfirmation}
-            onChange={() => setPasswordConfirmation(passwordConfirmation)}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
         </div>
         <button onClick={handleSubmit}>Sign up</button>

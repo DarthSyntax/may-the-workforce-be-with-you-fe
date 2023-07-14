@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { StateContext } from '../../context';
 
 const EmployerLogin = ({ setLogin }) => {
-  const { setToken, setCurrentUser } = useContext(StateContext);
+  const { setToken, setCurrentEmployer } = useContext(StateContext);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
@@ -26,7 +26,7 @@ const EmployerLogin = ({ setLogin }) => {
 
     const reqJson = await req.json();
     setToken(reqJson.headers.Authorization.split(' ')[1]);
-    setCurrentUser(reqJson.data);
+    setCurrentEmployer(reqJson.data);
   };
 
   return (
