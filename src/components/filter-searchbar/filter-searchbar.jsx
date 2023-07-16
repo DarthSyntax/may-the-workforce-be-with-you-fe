@@ -24,7 +24,7 @@ const FilterSearchBar = () => {
 
   return (
     <div className='input__container'>
-      <label className='input__label'>Job Title</label>
+      <label className='input__label'>Enter desired Job Title</label>
       <input
         placeholder='Choose your path, Padawan...'
         className='input'
@@ -33,7 +33,6 @@ const FilterSearchBar = () => {
         value={searchTerms}
         onChange={(e) => setSearchTerms(e.target.value)}
       />
-      <p className='input__description'>What position do you want??</p>
     </div>
   );
 };

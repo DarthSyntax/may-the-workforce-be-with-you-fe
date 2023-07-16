@@ -7,15 +7,15 @@ const Job = ({ job }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    navigate(`/jobs/${job.id}`);
+    navigate(`/jobs/${e.target.id}`);
   };
 
   return (
-    <div className='job-listing' onClick={handleClick}>
-      <span>Job Title: {job.title}</span> <br />
-      <span>Job Description: {job.description}</span> <br />
-      <span>Salary: {job.salary}</span> <br />
-      <span>Experience Level: {job.exp_level}</span>
+    <div className='job-listing' onClick={handleClick} id={`${job.id}`}>
+      <span id={`${job.id}`}>Employer</span> <br />
+      <span id={`${job.id}`}>Job Title: {job.title}</span> <br />
+      <span id={`${job.id}`}>Salary: {job.salary}</span> <br />
+      <span id={`${job.id}`}>Experience Level: {job.exp_level}</span>
     </div>
   );
 };

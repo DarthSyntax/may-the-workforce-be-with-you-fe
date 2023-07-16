@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './signup.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../context';
 
 const SignUp = ({ setLogin }) => {
@@ -10,21 +10,25 @@ const SignUp = ({ setLogin }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
     setLogin(true);
   };
 
   const handleSubmit = async () => {
-    const req = await fetch('http://localhost:9000/users/sign_up', {
+    const req = await fetch('http://localhost:9000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        full_name: fullName,
-        email: email,
-        password: password,
-        password_confirmation: passwordConfirmation,
+        user: {
+          full_name: fullName,
+          email: email,
+          password: password,
+          password_confirmation: passwordConfirmation,
+        },
       }),
     });
 
@@ -34,6 +38,7 @@ const SignUp = ({ setLogin }) => {
     if (authHeader) {
       setToken(authHeader.split(' ')[1]);
       setCurrentUser(reqJson.data);
+      navigate('/');
     }
   };
 

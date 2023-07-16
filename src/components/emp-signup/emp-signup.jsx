@@ -15,16 +15,18 @@ const EmployerSignUp = ({ setLogin }) => {
   };
 
   const handleSubmit = async () => {
-    const req = await fetch('http://localhost:9000/employers/sign_up', {
+    const req = await fetch('http://localhost:9000/employers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        employer_name: employerName,
-        email: email,
-        password: password,
-        password_confirmation: passwordConfirmation,
+        employer: {
+          employer_name: employerName,
+          email: email,
+          password: password,
+          password_confirmation: passwordConfirmation,
+        },
       }),
     });
 

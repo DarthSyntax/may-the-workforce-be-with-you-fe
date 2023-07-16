@@ -6,6 +6,7 @@ import EmployerSignUpLoginPage from './pages/emp-signup-login-page/emp-signup-lo
 import { StateContext } from './context';
 import Header from './components/header/header';
 import HomePage from './pages/home-page/home-page';
+import JobInfoPage from './pages/job-info-page/job-info-page';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -41,10 +42,8 @@ function App() {
                 path='/'
                 element={token ? <HomePage /> : <SignUpLoginPage />}
               />
-              <Route
-                path='/employers'
-                element={<EmployerSignUpLoginPage />}
-              ></Route>
+              <Route path='/employers' element={<EmployerSignUpLoginPage />} />
+              <Route path='/jobs/:job_id' element={token && <JobInfoPage />} />
             </Routes>
           </div>
         </div>

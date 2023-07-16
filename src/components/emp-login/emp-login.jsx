@@ -19,8 +19,7 @@ const EmployerLogin = ({ setLogin }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        employer: { email: email, password: password },
       }),
     });
 
