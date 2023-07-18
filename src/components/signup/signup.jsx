@@ -12,11 +12,13 @@ const SignUp = ({ setLogin }) => {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setLogin(true);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const req = await fetch('http://localhost:9000/users', {
       method: 'POST',
       headers: {
@@ -38,7 +40,7 @@ const SignUp = ({ setLogin }) => {
     if (authHeader) {
       setToken(authHeader.split(' ')[1]);
       setCurrentUser(reqJson.data);
-      navigate('/');
+      // navigate('/');
     }
   };
 

@@ -7,7 +7,7 @@ const SignUpLoginPage = () => {
   const [login, setLogin] = useState(false);
   return (
     <div className='auth-container'>
-      {login ? <Login setLogin={setLogin} /> : <SignUp setLogin={setLogin} />}
+      {!login ? <Login setLogin={setLogin} /> : <SignUp setLogin={setLogin} />}
     </div>
   );
 };

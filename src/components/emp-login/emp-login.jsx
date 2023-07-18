@@ -1,18 +1,23 @@
 import React, { useState, useContext } from 'react';
 import './emp-login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../context';
 
 const EmployerLogin = ({ setLogin }) => {
-  const { setToken, setCurrentEmployer } = useContext(StateContext);
+  const { setToken, setCurrentEmployer, setJobs, currentEmployer } =
+    useContext(StateContext);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleClick = () => {
+  // const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
     setLogin(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const req = await fetch('http://localhost:9000/employers/sign_in', {
       method: 'POST',
       headers: {
@@ -24,8 +29,11 @@ const EmployerLogin = ({ setLogin }) => {
     });
 
     const reqJson = await req.json();
-    setToken(reqJson.headers.Authorization.split(' ')[1]);
-    setCurrentEmployer(reqJson.data);
+    const authHeader = req.headers.get('Authorization');
+    if (authHeader) {
+      setToken(authHeader.split(' ')[1]);
+      await setCurrentEmployer(reqJson.data);
+    }
   };
 
   return (
@@ -39,14 +47,14 @@ const EmployerLogin = ({ setLogin }) => {
             className='input'
             placeholder='Email'
             value={email}
-            onChange={() => setEmail(email)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type='password'
             className='input'
             placeholder='Password'
             value={password}
-            onChange={() => setPassword(password)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button onClick={handleSubmit}>Sign in</button>

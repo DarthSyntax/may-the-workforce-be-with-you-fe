@@ -7,7 +7,7 @@ const EmployerSignUpLoginPage = () => {
   const [login, setLogin] = useState(false);
   return (
     <div className='auth-container'>
-      {login ? (
+      {!login ? (
         <EmployerLogin setLogin={setLogin} />
       ) : (
         <EmployerSignUp setLogin={setLogin} />

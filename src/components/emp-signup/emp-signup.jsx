@@ -10,11 +10,13 @@ const EmployerSignUp = ({ setLogin }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setLogin(true);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const req = await fetch('http://localhost:9000/employers', {
       method: 'POST',
       headers: {
