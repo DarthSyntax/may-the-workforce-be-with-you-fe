@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import './emp-add-job-modal.css';
+import './emp-edit-job-modal.css';
 import {
   Button,
   Modal,
@@ -11,12 +11,12 @@ import {
 } from '@mui/material';
 import { StateContext } from '../../context';
 
-const EmployerAddJobModal = () => {
+const EmployerEditJobModal = ({ jobInfo }) => {
   const [open, setOpen] = useState(false);
-  const [jobTitle, setJobTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [salary, setSalary] = useState('');
-  const [experienceLevel, setExperienceLevel] = useState('');
+  const [jobTitle, setJobTitle] = useState(jobInfo?.title);
+  const [description, setDescription] = useState(jobInfo?.description);
+  const [salary, setSalary] = useState(jobInfo?.salary);
+  const [experienceLevel, setExperienceLevel] = useState(jobInfo?.exp_level);
 
   const { setJobs, currentEmployer } = useContext(StateContext);
 
@@ -32,13 +32,12 @@ const EmployerAddJobModal = () => {
     e.preventDefault();
 
     if (jobTitle && description && salary && experienceLevel) {
-      const req = await fetch('http://localhost:9000/jobs', {
-        method: 'POST',
+      const req = await fetch(`http://localhost:9000/jobs/${jobInfo.id}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          employer_id: currentEmployer.id,
           title: jobTitle,
           description: description,
           salary: salary,
@@ -71,8 +70,8 @@ const EmployerAddJobModal = () => {
   };
 
   return (
-    <div className='emp-add-job'>
-      <button onClick={handleOpen}>Add New Job</button>
+    <div className='emp-edit-job'>
+      <button onClick={handleOpen}>Edit</button>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -141,4 +140,4 @@ const EmployerAddJobModal = () => {
   );
 };
 
-export default EmployerAddJobModal;
+export default EmployerEditJobModal;
